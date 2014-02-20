@@ -1,18 +1,15 @@
 require 'sinatra'
 require 'sqlite3'
 
-def get_homepage
-  erb :index
-end
-
 get '/' do
-  get_homepage
+  erb :index
 end
 
 post '/' do
   unless params[:sms_db] &&(tmpfile = params[:sms_db][:tempfile])
-    return get_homepage
+    return erb "<br />Error"
   end
+
   
   erb :result
 end
