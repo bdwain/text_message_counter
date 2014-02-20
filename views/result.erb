@@ -1,0 +1,14 @@
+<table>
+   <tr>
+      <th></th>
+      <th>Phone Number</th>
+      <th>Total Messages</th>
+   </tr>
+   <% @result.each_with_index do |row, index| %>
+      <tr>
+         <td><%= index+1 %></td>
+         <td><%= row['id'] %></td>
+         <td><%= row['ct'] %></td>
+      </tr>
+   <% end %>
+</table>

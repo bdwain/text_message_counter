@@ -1,20 +1,18 @@
 body
 {
-  /* background: url('bg4.jpg');
-   background-size: cover;
-   background-color: #333333;
-   background-attachment: fixed;*/
+   width: 1000px;
+   padding: 8 15px;
+   margin: 0 auto;
 }
 
 h1
 {
    font-family: "merriweather";
 }
-#wrapper
+
+#content
 {
-   width: 1000px;
-   padding: 0 15px;
-   margin: 0 auto;
+   margin-top: 10px;
 }
 
 li
