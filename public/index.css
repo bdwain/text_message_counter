@@ -1,0 +1,23 @@
+body
+{
+  /* background: url('bg4.jpg');
+   background-size: cover;
+   background-color: #333333;
+   background-attachment: fixed;*/
+}
+
+h1
+{
+   font-family: "merriweather";
+}
+#wrapper
+{
+   width: 1000px;
+   padding: 0 15px;
+   margin: 0 auto;
+}
+
+li
+{
+   padding-bottom: 10px;
+}
