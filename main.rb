@@ -10,12 +10,25 @@ post '/' do
     raise "no file"
   end
 
-
   begin
     db = SQLite3::Database::new(tmpfile.path)
     db.results_as_hash = true
-    @result = db.execute("select h.ROWID, h.service, h.id, count(m.ROWID) as ct from message as m 
-    inner join handle as h on m.handle_id = h.ROWID GROUP BY h.id order by ct desc")
+    recieved_totals = db.execute("SELECT h.id, count(m.ROWID) AS count FROM message AS m 
+    INNER JOIN handle AS h ON m.handle_id = h.ROWID WHERE m.is_from_me = 0 GROUP BY h.id ORDER BY count DESC")
+
+    sent_totals = db.execute("SELECT h.id, count(m.ROWID) AS count FROM message AS m INNER JOIN chat_message_join
+    AS cmj ON m.ROWID = cmj.message_id INNER JOIN chat_handle_join AS chj ON cmj.chat_id = chj.chat_id INNER JOIN
+    handle AS h ON chj.handle_id = h.ROWID WHERE m.is_from_me = 1 GROUP BY h.id ORDER BY count DESC")
+
+    @result = Hash.new{ |hash, key| hash[key] = {:recieved => 0, :sent => 0, :total => 0}}
+    recieved_totals.each do |row|
+      @result[row["id"]][:recieved] = row["count"]
+    end
+    sent_totals.each do |row|
+      @result[row["id"]][:sent] = row["count"]
+      @result[row["id"]][:total] = row["count"] + @result[row["id"]][:recieved]
+    end
+    
   ensure
     db.close
     tmpfile.close!

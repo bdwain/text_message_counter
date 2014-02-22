@@ -3,12 +3,16 @@
       <th></th>
       <th>Phone Number</th>
       <th>Total Messages</th>
+      <th>Received Messages</th>
+      <th>Sent Messages</th>
    </tr>
-   <% @result.each_with_index do |row, index| %>
+   <% @result.each_with_index do |(id, totals), index| %>
       <tr>
          <td><%= index+1 %></td>
-         <td><%= row['id'] %></td>
-         <td><%= row['ct'] %></td>
+         <td><%= id %></td>
+         <td><%= totals[:total] %></td>
+         <td><%= totals[:recieved] %></td>
+         <td><%= totals[:sent] %></td>
       </tr>
    <% end %>
 </table>
