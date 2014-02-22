@@ -22,13 +22,13 @@ post '/' do
 
     @result = Hash.new{ |hash, key| hash[key] = {:recieved => 0, :sent => 0, :total => 0}}
     recieved_totals.each do |row|
-      @result[row["id"]][:recieved] = row["count"]
+      @result[row["id"]][:recieved] = @result[row["id"]][:total] = row["count"]
     end
     sent_totals.each do |row|
       @result[row["id"]][:sent] = row["count"]
-      @result[row["id"]][:total] = row["count"] + @result[row["id"]][:recieved]
+      @result[row["id"]][:total] += row["count"]
     end
-    
+
   ensure
     db.close
     tmpfile.close!
