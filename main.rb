@@ -34,6 +34,7 @@ post '/' do
     tmpfile.close!
   end
 
+  @result = @result.sort_by { |k, v| v[:total] }.reverse
   erb :result
 end
 
