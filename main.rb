@@ -47,5 +47,5 @@ error do
 end
 
 error SQLite3::Exception do
-  erb "Database Error: Please ensure you are uploading a valid database from ios7"
+  erb "Error: Please ensure you are uploading a valid database from ios7"
 end
