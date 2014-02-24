@@ -1,3 +1,4 @@
+require './sinatra/head_includes'
 require 'sinatra'
 require 'sqlite3'
 
@@ -35,6 +36,8 @@ post '/' do
   end
 
   @result = @result.sort_by { |k, v| v[:total] }.reverse
+
+  js :jquery
   erb :result
 end
 
