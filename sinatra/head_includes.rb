@@ -13,11 +13,11 @@ module Sinatra
         js << args
         js << @js if @js
         js.flatten.uniq.map do |script| 
-          "<script src=\"#{path_to script}\"></script>"
+          "<script src=\"#{path_to_js script}\" type=\"text/javascript\"></script>"
         end.join
       end
  
-      def path_to script
+      def path_to_js script
         case script
           when :jquery then 'http://code.jquery.com/jquery-2.1.0.min.js'
           else "javascript/" + script.to_s + '.js'
@@ -37,11 +37,11 @@ module Sinatra
       css << args
       css << @css if @css
       css.flatten.uniq.map do |stylesheet| 
-        "<link href=\"/#{stylesheet}.css\" media=\"screen, projection\" rel=\"stylesheet\" />"
+        "<link href=\"/#{path_to_css stylesheet}\" rel=\"stylesheet\" type=\"text/css\" />"
       end.join
     end
 
-    def path_to stylesheet
+    def path_to_css stylesheet
       "css/" + stylesheet.to_s + '.css'
     end
   end

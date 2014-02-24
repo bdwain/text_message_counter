@@ -37,7 +37,8 @@ post '/' do
 
   @result = @result.sort_by { |k, v| v[:total] }.reverse
 
-  js :jquery
+  js :jquery, :tablesorter, :results
+  css :tablesorter
   erb :result
 end
 

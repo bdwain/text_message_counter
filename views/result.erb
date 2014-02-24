@@ -1,34 +1,38 @@
-<table>
-   <tr>
-      <th></th>
-      <th>Phone Number</th>
-      <th>Total Messages</th>
-      <th>Received Messages</th>
-      <th>Sent Messages</th>
-      <th>Recieved/Sent Ratio</th>
-      <th>Recieved/Total Ratio </th>
-   </tr>
-   <% @result.each_with_index do |(id, totals), index| %>
+<table id="results" class="tablesorter">
+   <thead>
       <tr>
-         <td><%= index+1 %></td>
-         <td><%= id %></td>
-         <td><%= totals[:total] %></td>
-         <td><%= totals[:recieved] %></td>
-         <td><%= totals[:sent] %></td>
-         <td>
-            <%=
-               if totals[:sent] != 0
-                  totals[:recieved].fdiv(totals[:sent]).round(4)
-               else
-                  "infinite"
-               end
-            %>
-         </td>
-         <td>
-            <%=
-               totals[:recieved].fdiv(totals[:total]).round(4)
-            %>
-         </td>
+         <th>#</th>
+         <th>Phone Number</th>
+         <th>Total Messages</th>
+         <th>Received Messages</th>
+         <th>Sent Messages</th>
+         <th>Recieved/Sent Ratio</th>
+         <th>Recieved/Total Ratio </th>
       </tr>
-   <% end %>
+   </thead>
+   <tbody>
+      <% @result.each_with_index do |(id, totals), index| %>
+         <tr>
+            <td><%= index+1 %></td>
+            <td><%= id %></td>
+            <td><%= totals[:total] %></td>
+            <td><%= totals[:recieved] %></td>
+            <td><%= totals[:sent] %></td>
+            <td>
+               <%=
+                  if totals[:sent] != 0
+                     totals[:recieved].fdiv(totals[:sent]).round(4)
+                  else
+                     "infinite"
+                  end
+               %>
+            </td>
+            <td>
+               <%=
+                  totals[:recieved].fdiv(totals[:total]).round(4)
+               %>
+            </td>
+         </tr>
+      <% end %>
+   </tbody>
 </table>
