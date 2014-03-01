@@ -35,7 +35,7 @@
             </td>
             <td>
                <%=
-                  (totals[:total].fdiv(@total_messages).round(4)*100).to_s + "%"
+                  (totals[:total].fdiv(@total_messages)*100).round(2).to_s + "%"
                %>
                </td>
          </tr>
