@@ -8,6 +8,7 @@
          <th>Sent Messages</th>
          <th>Recieved/Sent Ratio</th>
          <th>Recieved/Total Ratio </th>
+         <th>% Of All Messages </th>
       </tr>
    </thead>
    <tbody>
@@ -32,6 +33,11 @@
                   totals[:recieved].fdiv(totals[:total]).round(4)
                %>
             </td>
+            <td>
+               <%=
+                  (totals[:total].fdiv(@total_messages).round(4)*100).to_s + "%"
+               %>
+               </td>
          </tr>
       <% end %>
    </tbody>
